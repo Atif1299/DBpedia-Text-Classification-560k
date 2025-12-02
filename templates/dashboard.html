@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Dashboard - DBpedia Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>DBpedia Classifier</h2>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Classify</a>
+                <a href="/dashboard" class="nav-link active">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <h1>Model Performance Dashboard</h1>
+        <p>Comparison of 10 machine learning algorithms trained on DBpedia dataset</p>
+    </section>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-content">
+        <!-- Performance Charts -->
+        <div class="dashboard-grid">
+            <div class="card chart-card">
+                <h3>F1-Score Comparison</h3>
+                <canvas id="f1Chart"></canvas>
+            </div>
+
+            <div class="card chart-card">
+                <h3>Accuracy Comparison</h3>
+                <canvas id="accuracyChart"></canvas>
+            </div>
+
+            <div class="card chart-card">
+                <h3>Training Time Analysis</h3>
+                <canvas id="timeChart"></canvas>
+            </div>
+
+            <div class="card chart-card">
+                <h3>Performance vs Time</h3>
+                <canvas id="scatterChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Model Comparison Table -->
+        <div class="card table-card">
+            <h3>Model Comparison Table</h3>
+            <div class="table-container">
+                <table id="modelTable">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model Name</th>
+                            <th>F1-Score (Macro)</th>
+                            <th>F1-Score (Weighted)</th>
+                            <th>Accuracy</th>
+                            <th>Training Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modelTableBody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 2rem;">Loading data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Project Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-title">Dataset</div>
+                <div class="stat-value">DBpedia</div>
+                <div class="stat-desc">560,000 samples</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-title">Categories</div>
+                <div class="stat-value">14</div>
+                <div class="stat-desc">Classification classes</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🔧</div>
+                <div class="stat-title">Features</div>
+                <div class="stat-value">5,000</div>
+                <div class="stat-desc">TF-IDF features</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🤖</div>
+                <div class="stat-title">Models</div>
+                <div class="stat-value">10</div>
+                <div class="stat-desc">ML algorithms</div>
+            </div>
+        </div>
+
+        <!-- Methodology -->
+        <div class="card methodology-card">
+            <h3>Methodology</h3>
+            <div class="methodology-grid">
+                <div class="method-step">
+                    <div class="step-number">1</div>
+                    <h4>Preprocessing</h4>
+                    <ul>
+                        <li>Lowercase conversion</li>
+                        <li>Punctuation removal</li>
+                        <li>Stopword removal</li>
+                        <li>Whitespace normalization</li>
+                    </ul>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">2</div>
+                    <h4>Feature Extraction</h4>
+                    <ul>
+                        <li>TF-IDF Vectorization</li>
+                        <li>Word unigrams</li>
+                        <li>Max 5,000 features</li>
+                        <li>min_df=2, max_df=0.8</li>
+                    </ul>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">3</div>
+                    <h4>Model Training</h4>
+                    <ul>
+                        <li>10 ML algorithms</li>
+                        <li>Full dataset training</li>
+                        <li>Default parameters</li>
+                        <li>Performance comparison</li>
+                    </ul>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">4</div>
+                    <h4>Evaluation</h4>
+                    <ul>
+                        <li>F1-Score (Macro)</li>
+                        <li>F1-Score (Weighted)</li>
+                        <li>Accuracy metrics</li>
+                        <li>Training time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Natural Language Processing Course Project - DBpedia Text Classification System</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

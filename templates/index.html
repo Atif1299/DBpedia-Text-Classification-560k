@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBpedia Text Classification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>DBpedia Classifier</h2>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link active">Classify</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">DBpedia Text Classification</h1>
+            <p class="hero-subtitle">Machine Learning system to classify Wikipedia articles into 14 categories</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">560K</div>
+                    <div class="stat-label">Training Samples</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">14</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">10</div>
+                    <div class="stat-label">ML Models</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">81.15%</div>
+                    <div class="stat-label">Best F1-Score</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Classification Section (Full Width) -->
+        <div class="classification-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Text Classification</h2>
+                    <p>Enter text below to predict its category</p>
+                </div>
+                
+                <form id="classificationForm">
+                    <div class="form-group">
+                        <label for="textInput">Input Text</label>
+                        <textarea 
+                            id="textInput" 
+                            placeholder="Example: Albert Einstein was a German-born theoretical physicist who developed the theory of relativity..."
+                            rows="8"
+                            required
+                        ></textarea>
+                        <div class="char-count">
+                            <span id="charCount">0</span> characters
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <span id="btnText">Classify Text</span>
+                        <span id="btnLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Result Card -->
+            <div id="resultCard" class="card result-card" style="display: none;">
+                <div class="card-header">
+                    <h2>Classification Result</h2>
+                </div>
+                
+                <div class="result-main">
+                    <div class="result-category">
+                        <div class="label">Predicted Category</div>
+                        <div id="category" class="category-value"></div>
+                    </div>
+                    
+                    <div id="confidenceContainer" class="confidence-bar-container" style="display: none;">
+                        <div class="label">Confidence Score</div>
+                        <div class="confidence-bar">
+                            <div id="confidenceBar" class="confidence-fill"></div>
+                            <span id="confidence" class="confidence-text"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="topPredictions" class="top-predictions" style="display: none;">
+                    <h4>Top 3 Predictions</h4>
+                    <div id="topPredictionsList"></div>
+                </div>
+
+                <div class="result-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Model Used</span>
+                        <span id="model" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Words Processed</span>
+                        <span id="wordCount" class="detail-value"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="card categories-card">
+            <h3>Supported Categories</h3>
+            <div class="categories-grid-horizontal">
+                <span class="category-badge">Person</span>
+                <span class="category-badge">Place</span>
+                <span class="category-badge">Company</span>
+                <span class="category-badge">Album</span>
+                <span class="category-badge">Film</span>
+                <span class="category-badge">Book</span>
+                <span class="category-badge">Building</span>
+                <span class="category-badge">Natural Place</span>
+                <span class="category-badge">Animal</span>
+                <span class="category-badge">Plant</span>
+                <span class="category-badge">Village</span>
+                <span class="category-badge">University</span>
+                <span class="category-badge">Transportation</span>
+                <span class="category-badge">Sports Team</span>
+            </div>
+        </div>
+
+        <!-- Project Information (Horizontal) -->
+        <div class="card info-card-horizontal">
+            <h3>Project Information</h3>
+            <div class="info-grid-horizontal">
+                <div class="info-item">
+                    <h4>Dataset</h4>
+                    <p>DBpedia corpus with 560,000 Wikipedia articles</p>
+                </div>
+                <div class="info-item">
+                    <h4>Feature Extraction</h4>
+                    <p>TF-IDF Vectorization with 5,000 features</p>
+                </div>
+                <div class="info-item">
+                    <h4>Preprocessing</h4>
+                    <p>Lowercase, punctuation removal, stopword removal</p>
+                </div>
+                <div class="info-item">
+                    <h4>Best Model</h4>
+                    <p>Passive Aggressive Classifier (F1-Score: 0.8115)</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Natural Language Processing Course Project - DBpedia Text Classification System</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
